@@ -136,7 +136,7 @@ section{height:100vh;width:100%;scroll-snap-align:start;position:relative;displa
 .ec-top{margin-bottom:26px;flex-shrink:0;}
 .ec-h{font-family:var(--serif);font-size:clamp(18px,2vw,27px);font-weight:400;line-height:1.2;color:var(--ink);letter-spacing:-.01em;margin-bottom:7px;text-wrap:balance;}
 .ec-intro{font-size:11.5px;color:var(--ash);line-height:1.5;}
-.ec-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:1px;background:var(--hairline);border:1px solid var(--hairline);flex:1;min-height:0;}
+.ec-grid{display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:1px;background:var(--hairline);border:1px solid var(--hairline);flex:1;min-height:0;}
 .ei{background:var(--white);padding:18px 22px;display:flex;flex-direction:column;gap:7px;min-height:0;overflow:hidden;}
 .ei-name{font-size:12px;font-weight:600;color:var(--forest);line-height:1.3;}
 .ei-desc{font-size:11px;line-height:1.55;color:var(--ink);flex:1;}
@@ -165,8 +165,8 @@ section{height:100vh;width:100%;scroll-snap-align:start;position:relative;displa
   <div class="nav-ms">MS</div>
   <div class="nav-r">
     <div class="lang-pill">
-      <button class="lb on" id="bEn" onclick="L('en')">EN</button>
-      <button class="lb" id="bEs" onclick="L('es')">ES</button>
+      <button class="lb on" id="bEs" onclick="L('es')">Español</button>
+      <button class="lb" id="bEn" onclick="L('en')">English</button>
     </div>
     <div class="dots" id="dts">
       <div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -454,11 +454,16 @@ section{height:100vh;width:100%;scroll-snap-align:start;position:relative;displa
 <!-- P6 — ECOSYSTEM -->
 <section id="ecosystem">
   <div class="ec-top">
-    <div class="lbl" style="margin-bottom:10px;" data-i18n data-en="OTHER PROJECTS" data-es="OTROS PROYECTOS">OTHER PROJECTS</div>
+    <div class="lbl" style="margin-bottom:10px;" data-i18n data-en="IMPACT ECOSYSTEM" data-es="ECOSISTEMA DE IMPACTO">ECOSISTEMA DE IMPACTO</div>
+    <h2 class="ec-h" data-i18n
+        data-en="Sustainability doesn't happen inside a single organization."
+        data-es="La sustentabilidad no sucede dentro de una sola organización.">
+      La sustentabilidad no sucede dentro de una sola organización.
+    </h2>
     <p class="ec-intro" data-i18n
-       data-en="Additional projects and initiatives I contributed to across Argentina."
-       data-es="Proyectos e iniciativas adicionales en los que participé en Argentina.">
-      Additional projects and initiatives I contributed to across Argentina.
+       data-en="Across six years, I've contributed to multiple cross-sector sustainability initiatives in Argentina."
+       data-es="A lo largo de seis años, contribuí a múltiples iniciativas de sustentabilidad intersectoriales en Argentina.">
+      A lo largo de seis años, contribuí a múltiples iniciativas de sustentabilidad intersectoriales en Argentina.
     </p>
   </div>
   <div class="ec-grid">
@@ -467,13 +472,13 @@ section{height:100vh;width:100%;scroll-snap-align:start;position:relative;displa
     <div class="ei ei-has-img">
       <div class="ei-thumb"><img src="portfolio/Mesa sustentabilidad de Vicente lopez 1.jpeg" alt=""></div>
       <div class="ei-body">
-        <div class="ei-name" data-i18n data-en="Sustainability Board — Vicente López" data-es="Mesa de Sustentabilidad — Vicente López">Sustainability Board — Vicente López</div>
+        <div class="ei-name" data-i18n data-en="Sustainability Board — Vicente López" data-es="Mesa de Sustentabilidad — Vicente López">Mesa de Sustentabilidad — Vicente López</div>
         <p class="ei-desc" data-i18n
            data-en="Four-year collaboration between 200+ companies and local government co-designing climate action initiatives."
            data-es="Cuatro años de colaboración entre 200+ empresas y el municipio co-diseñando iniciativas de acción climática.">
-          Four-year collaboration between 200+ companies and local government co-designing climate action initiatives.
+          Cuatro años de colaboración entre 200+ empresas y el municipio co-diseñando iniciativas de acción climática.
         </p>
-        <div class="ei-met" data-i18n data-en="200+ companies · 30+ t recycled · 20+ native plantings/yr" data-es="200+ empresas · 30+ t recicladas · 20+ plantaciones/año">200+ companies · 30+ t recycled · 20+ native plantings/yr</div>
+        <div class="ei-met" data-i18n data-en="200+ companies · 30+ t recycled · 20+ native plantings/yr" data-es="200+ empresas · 30+ t recicladas · 20+ plantaciones/año">200+ empresas · 30+ t recicladas · 20+ plantaciones/año</div>
       </div>
     </div>
 
@@ -481,11 +486,11 @@ section{height:100vh;width:100%;scroll-snap-align:start;position:relative;displa
     <div class="ei ei-has-img">
       <div class="ei-thumb"><img src="portfolio/mesa de susntebilidad Caba.png" alt=""></div>
       <div class="ei-body">
-        <div class="ei-name" data-i18n data-en="Circular Economy — CABA" data-es="Mesas de Economía Circular — CABA">Circular Economy — CABA</div>
+        <div class="ei-name" data-i18n data-en="Circular Economy Network — CABA" data-es="Red de economía circular de CABA">Red de economía circular de CABA</div>
         <p class="ei-desc" data-i18n
-           data-en="Participated in circular economy working groups convened by the City of Buenos Aires."
-           data-es="Participé en las mesas de economía circular convocadas por la Ciudad de Buenos Aires.">
-          Participated in circular economy working groups convened by the City of Buenos Aires.
+           data-en="I actively participated in this Network, a cross-sector space formed by companies, SMEs and NGOs focused on designing and implementing policies, strategies and actions to drive the circular economy, grounded in sustainability and new economic models."
+           data-es="Participé activamente dentro de esta Red. Dentro de este espacio articulado por empresas, pymes y ONGs, se proponen diseñar e implementar políticas, estrategias y acciones que impulsan la economía circular, con bases en la sustentabilidad promoviendo nuevos modelos económicos.">
+          Participé activamente dentro de esta Red. Dentro de este espacio articulado por empresas, pymes y ONGs, se proponen diseñar e implementar políticas, estrategias y acciones que impulsan la economía circular, con bases en la sustentabilidad promoviendo nuevos modelos económicos.
         </p>
       </div>
     </div>
@@ -494,24 +499,11 @@ section{height:100vh;width:100%;scroll-snap-align:start;position:relative;displa
     <div class="ei ei-has-img">
       <div class="ei-thumb"><img src="portfolio/Bioproductos.jpeg" alt=""></div>
       <div class="ei-body">
-        <div class="ei-name" data-i18n data-en="Bioproductos — Ministry of Agriculture" data-es="Bioproductos — Ministerio de Agricultura">Bioproductos — Ministry of Agriculture</div>
+        <div class="ei-name" data-i18n data-en="Argentine Bioproducts" data-es="Bioproductos Argentinos">Bioproductos Argentinos</div>
         <p class="ei-desc" data-i18n
-           data-en="Engaged with the national bioproducts program led by Argentina's Ministry of Agriculture."
-           data-es="Participé en el programa nacional de bioproductos del Ministerio de Agricultura.">
-          Engaged with the national bioproducts program led by Argentina's Ministry of Agriculture.
-        </p>
-      </div>
-    </div>
-
-    <!-- Sistema B -->
-    <div class="ei ei-has-img">
-      <div class="ei-thumb"><img src="portfolio/Sistema B.jpeg" alt=""></div>
-      <div class="ei-body">
-        <div class="ei-name" data-i18n data-en="Sistema B / B Corp Ecosystem" data-es="Sistema B / Empresas B">Sistema B / B Corp Ecosystem</div>
-        <p class="ei-desc" data-i18n
-           data-en="Active participation in Argentina's B Corp community and events."
-           data-es="Participación activa en la comunidad y eventos de Empresas B en Argentina.">
-          Active participation in Argentina's B Corp community and events.
+           data-en="I led the application for our products at the launch of the Argentine Bioproduct Seal by the Ministry of Agriculture, which recognizes producers committed to responsible and sustainable production."
+           data-es="Llevé adelante la solicitud para nuestros productos en el lanzamiento del Sello de Bioproducto Argentino del Ministerio de Agricultura, Ganadería y Pesca de la Nación, que premiaba a quienes apuestan por una producción más responsable y comprometida con el futuro del planeta.">
+          Llevé adelante la solicitud para nuestros productos en el lanzamiento del Sello de Bioproducto Argentino del Ministerio de Agricultura, Ganadería y Pesca de la Nación, que premiaba a quienes apuestan por una producción más responsable y comprometida con el futuro del planeta.
         </p>
       </div>
     </div>
@@ -521,16 +513,11 @@ section{height:100vh;width:100%;scroll-snap-align:start;position:relative;displa
       <div class="ei-thumb"><img src="portfolio/Bioferia.JPG" alt=""></div>
       <div class="ei-body">
         <div class="ei-name" data-i18n data-en="Bioferia" data-es="Bioferia">Bioferia</div>
-        <p class="ei-desc ph-txt" data-i18n data-en="[Matías: add description]" data-es="[Matías: agregar descripción]">[Matías: add description]</p>
-      </div>
-    </div>
-
-    <!-- Impact House -->
-    <div class="ei ei-has-img">
-      <div class="ei-thumb"><img src="portfolio/sistema impact house.jpg" alt=""></div>
-      <div class="ei-body">
-        <div class="ei-name" data-i18n data-en="Sistema Impact House" data-es="Sistema Impact House">Sistema Impact House</div>
-        <p class="ei-desc ph-txt" data-i18n data-en="[Matías: add description]" data-es="[Matías: agregar descripción]">[Matías: add description]</p>
+        <p class="ei-desc" data-i18n
+           data-en="I participated four years in a row in Argentina's largest sustainability event, with our own booth, building key connections and opening commercial opportunities."
+           data-es="Participé por 4 años seguidos del evento de sustentabilidad más grande del país, con stand propio, haciendo conexiones claves y abriendo oportunidades comerciales.">
+          Participé por 4 años seguidos del evento de sustentabilidad más grande del país, con stand propio, haciendo conexiones claves y abriendo oportunidades comerciales.
+        </p>
       </div>
     </div>
 
@@ -594,7 +581,7 @@ section{height:100vh;width:100%;scroll-snap-align:start;position:relative;displa
 <script>
 var els=document.querySelectorAll('[data-i18n]');
 function L(lang){els.forEach(function(el){var v=el.getAttribute('data-'+lang);if(v!==null)el.innerHTML=v;});document.getElementById('bEn').classList.toggle('on',lang==='en');document.getElementById('bEs').classList.toggle('on',lang==='es');document.documentElement.lang=lang;try{localStorage.setItem('pl',lang);}catch(e){}}
-try{L(localStorage.getItem('pl')||'en');}catch(e){L('en');}
+try{L(localStorage.getItem('pl')||'es');}catch(e){L('es');}
 var sc=document.getElementById('sc');
 var secs=Array.from(document.querySelectorAll('section'));
 var dots=Array.from(document.querySelectorAll('.dot'));
