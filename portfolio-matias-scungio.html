@@ -52,10 +52,18 @@ section{height:100vh;width:100%;scroll-snap-align:start;position:relative;displa
 .ab-l{flex:0 0 56%;padding:72px 52px 72px 64px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--hairline);}
 .ab-stmt{font-size:clamp(14.5px,1.55vw,19px);line-height:1.68;color:var(--ink);margin-bottom:22px;text-wrap:balance;}
 .ab-ctx{font-size:11.5px;line-height:1.7;color:var(--ash);padding-top:20px;border-top:1px solid var(--hairline);}
-.ab-r{flex:0 0 44%;padding:72px 64px 72px 52px;display:flex;flex-direction:column;justify-content:center;gap:32px;}
-.met{display:flex;flex-direction:column;gap:3px;}
-.met-n{font-family:var(--serif);font-size:clamp(34px,3.8vw,52px);font-weight:400;line-height:1;color:var(--forest);letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
-.met-d{font-size:11px;line-height:1.4;color:var(--ash);}
+.ab-r{flex:0 0 44%;padding:72px 64px 72px 52px;display:flex;flex-direction:column;justify-content:center;}
+.ab-body{font-size:12.5px;line-height:1.72;color:var(--ash);margin-bottom:14px;}
+.ab-flow-hd{font-family:var(--mono);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--river);margin-bottom:20px;}
+.ab-flow{display:flex;flex-direction:column;}
+.ab-flow-item{display:flex;align-items:center;gap:13px;}
+.ab-flow-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;border:1.5px solid var(--river);background:transparent;}
+.ab-flow-dot--in{background:var(--river);}
+.ab-flow-dot--out{background:var(--forest);border-color:var(--forest);}
+.ab-flow-txt{font-size:12.5px;color:var(--ink);line-height:1.3;}
+.ab-flow-txt--out{color:var(--forest);font-weight:500;}
+.ab-flow-conn{width:1px;height:18px;background:var(--river);opacity:.22;margin-left:3px;}
+.ab-flow-sub{font-size:10.5px;color:var(--ash);font-style:italic;margin-top:22px;line-height:1.65;padding-top:16px;border-top:1px solid var(--hairline);}
 #soil{background:var(--white);flex-direction:row;}
 .so-txt{flex:0 0 52%;padding:72px 48px 72px 64px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--hairline);overflow:hidden;}
 .case-h{font-family:var(--serif);font-size:clamp(19px,2.2vw,30px);font-weight:400;line-height:1.18;color:var(--ink);letter-spacing:-.01em;margin-bottom:22px;text-wrap:balance;}
@@ -169,22 +177,27 @@ section{height:100vh;width:100%;scroll-snap-align:start;position:relative;displa
 <section id="about">
   <div class="ab-l">
     <div class="lbl" style="margin-bottom:18px;" data-i18n data-en="ABOUT" data-es="SOBRE MÍ">ABOUT</div>
-    <p class="ab-stmt" data-i18n
-       data-en="I'm an Industrial Designer who builds sustainability projects from the ground up. For the past six years I've led the development of SOIL, a compostable packaging company, and coordinated multi-stakeholder climate initiatives across private companies, local governments, and civil society. I don't consult from outside — I build from within."
-       data-es="Soy Diseñador Industrial y construyo proyectos de sostenibilidad desde cero. Durante los últimos seis años lideré el desarrollo de SOIL, una empresa de envases compostables, y coordiné iniciativas climáticas multi-actor entre empresas privadas, gobiernos locales y sociedad civil. No consulto desde afuera — construyo desde adentro.">
-      I'm an Industrial Designer who builds sustainability projects from the ground up. For the past six years I've led the development of SOIL, a compostable packaging company, and coordinated multi-stakeholder climate initiatives across private companies, local governments, and civil society. I don't consult from outside — I build from within.
-    </p>
-    <p class="ab-ctx" data-i18n
-       data-en="SOIL was born and scaled within Bioz, a triple-impact business hub where I served as Lead Project Manager from 2020 to 2024."
-       data-es="SOIL nació y se escaló dentro de Bioz, un hub de negocios de triple impacto donde me desempeñé como Lead Project Manager de 2020 a 2024.">
-      SOIL was born and scaled within Bioz, a triple-impact business hub where I served as Lead Project Manager from 2020 to 2024.
-    </p>
+    <p class="ab-stmt">Throughout my career I have worked where sustainability, business and product development intersect.</p>
+    <p class="ab-body">Rather than specializing in a single discipline, I usually join projects at their earliest stages and help transform opportunities into real initiatives.</p>
+    <p class="ab-body">My work has included building brands, developing products, creating supplier networks, designing go-to-market strategies, coordinating multidisciplinary teams and supporting commercial growth.</p>
+    <p class="ab-ctx">Although every project has been different, my contribution has remained consistent: <span style="color:var(--forest);font-style:normal;">understand the challenge, structure the project and help it grow.</span></p>
   </div>
   <div class="ab-r">
-    <div class="met"><div class="met-n">7.3M</div><div class="met-d" data-i18n data-en="single-use plastics replaced" data-es="piezas plásticas de un solo uso reemplazadas">single-use plastics replaced</div></div>
-    <div class="met"><div class="met-n">100+</div><div class="met-d" data-i18n data-en="active B2B clients" data-es="clientes B2B activos">active B2B clients</div></div>
-    <div class="met"><div class="met-n">200+</div><div class="met-d" data-i18n data-en="companies in sustainability coalition" data-es="empresas en coalición de sostenibilidad">companies in sustainability coalition</div></div>
-    <div class="met"><div class="met-n">60d</div><div class="met-d" data-i18n data-en="idea to field deployment — zero budget" data-es="de idea a instalación en campo — sin presupuesto">idea to field deployment — zero budget</div></div>
+    <div class="ab-flow-hd">HOW I CREATE VALUE</div>
+    <div class="ab-flow">
+      <div class="ab-flow-item"><div class="ab-flow-dot ab-flow-dot--in"></div><div class="ab-flow-txt">Opportunity</div></div>
+      <div class="ab-flow-conn"></div>
+      <div class="ab-flow-item"><div class="ab-flow-dot"></div><div class="ab-flow-txt">Understand the challenge</div></div>
+      <div class="ab-flow-conn"></div>
+      <div class="ab-flow-item"><div class="ab-flow-dot"></div><div class="ab-flow-txt">Design the solution</div></div>
+      <div class="ab-flow-conn"></div>
+      <div class="ab-flow-item"><div class="ab-flow-dot"></div><div class="ab-flow-txt">Build the project</div></div>
+      <div class="ab-flow-conn"></div>
+      <div class="ab-flow-item"><div class="ab-flow-dot"></div><div class="ab-flow-txt">Launch</div></div>
+      <div class="ab-flow-conn"></div>
+      <div class="ab-flow-item"><div class="ab-flow-dot ab-flow-dot--out"></div><div class="ab-flow-txt ab-flow-txt--out">Grow</div></div>
+    </div>
+    <p class="ab-flow-sub">My contribution changes in every project, but the process is always the same.</p>
   </div>
 </section>
 
