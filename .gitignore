@@ -1,0 +1,8 @@
+# Solo publicar el portfolio web
+*.pdf
+*.ai
+*.jpg
+!portfolio/*.jpg
+!portfolio/*.JPG
+*.md
+CV*

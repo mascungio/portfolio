@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matías Scungio — Portfolio</title>
+<style>
+:root{--forest:#2C4238;--forest-deep:#1C2E26;--river:#7B9E93;--pampas:#EDE8DF;--paper:#F8F5EE;--white:#FFFFFF;--ink:#1C1C1A;--ash:#9B9B93;--hairline:rgba(28,28,26,0.1);--sans:system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;--serif:Georgia,'Times New Roman',ui-serif,serif;--mono:ui-monospace,'SF Mono','Cascadia Code','Courier New',monospace;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-family:var(--sans);font-size:16px;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;}
+body{overflow:hidden;}
+a{text-decoration:none;color:inherit;}
+.sc{height:100vh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;}
+.sc::-webkit-scrollbar{display:none;}
+.sc{-ms-overflow-style:none;scrollbar-width:none;}
+section{height:100vh;width:100%;scroll-snap-align:start;position:relative;display:flex;flex-direction:column;overflow:hidden;}
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:28px 48px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;}
+.nav-ms{font-family:var(--mono);font-size:10px;letter-spacing:0.15em;color:rgba(255,255,255,0.6);pointer-events:auto;user-select:none;}
+.nav-r{display:flex;align-items:center;gap:16px;pointer-events:auto;}
+.lang-pill{display:flex;align-items:center;background:rgba(0,0,0,0.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.16);border-radius:24px;padding:2px;}
+.lb{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45);background:none;border:none;padding:5px 11px;border-radius:20px;cursor:pointer;transition:all .2s;}
+.lb.on{background:rgba(255,255,255,0.9);color:var(--ink);}
+.dots{display:flex;flex-direction:column;gap:5px;}
+.dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,0.3);transition:all .3s;}
+.dot.on{height:14px;border-radius:2px;background:rgba(255,255,255,0.85);}
+.lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ash);}
+.lbl-lt{color:rgba(255,255,255,0.38);}
+.pf{position:relative;overflow:hidden;background:#D4CFC7;display:flex;align-items:center;justify-content:center;}
+.pf img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;}
+.pf-dk{background:rgba(0,0,0,0.28);}
+.pc-thumb{height:110px;overflow:hidden;flex-shrink:0;position:relative;}
+.pc-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.pc-thumb-ov{position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(28,46,38,0.35));}
+.pc-body{padding:12px 16px 14px;display:flex;flex-direction:column;gap:7px;flex:1;min-height:0;}
+.pc-has-img{padding:0;}
+.pc-logo{height:15px;display:block;max-width:80px;object-fit:contain;object-position:left;}
+.pc-feat .pc-logo{height:20px;max-width:110px;opacity:0.92;}
+.ei-thumb{height:72px;overflow:hidden;flex-shrink:0;}
+.ei-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.ei-body{padding:10px 16px 12px;display:flex;flex-direction:column;gap:5px;flex:1;min-height:0;}
+.ei-has-img{padding:0;}
+#cover{background:var(--forest-deep);}
+.cv-bg{position:absolute;inset:0;}
+.cv-ov{position:absolute;inset:0;background:linear-gradient(160deg,transparent 25%,rgba(15,25,20,.5) 65%,rgba(10,18,14,.88) 100%);z-index:1;}
+.cv-c{position:relative;z-index:2;padding:0 64px 64px;margin-top:auto;}
+.cv-name{font-family:var(--sans);font-size:clamp(48px,6.5vw,88px);font-weight:700;line-height:.92;letter-spacing:-.035em;color:#fff;margin-bottom:22px;}
+.cv-tag{font-size:clamp(13px,1.35vw,16px);font-weight:400;line-height:1.6;color:rgba(255,255,255,.7);max-width:500px;margin-bottom:28px;}
+.cv-meta{display:flex;align-items:center;gap:20px;}
+.cv-loc{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);}
+.cv-sep{width:1px;height:10px;background:rgba(255,255,255,.18);}
+#about{background:var(--paper);flex-direction:row;}
+.ab-l{flex:0 0 56%;padding:72px 52px 72px 64px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--hairline);}
+.ab-stmt{font-size:clamp(14.5px,1.55vw,19px);line-height:1.68;color:var(--ink);margin-bottom:22px;text-wrap:balance;}
+.ab-ctx{font-size:11.5px;line-height:1.7;color:var(--ash);padding-top:20px;border-top:1px solid var(--hairline);}
+.ab-r{flex:0 0 44%;padding:72px 64px 72px 52px;display:flex;flex-direction:column;justify-content:center;gap:32px;}
+.met{display:flex;flex-direction:column;gap:3px;}
+.met-n{font-family:var(--serif);font-size:clamp(34px,3.8vw,52px);font-weight:400;line-height:1;color:var(--forest);letter-spacing:-.02em;font-variant-numeric:tabular-nums;}
+.met-d{font-size:11px;line-height:1.4;color:var(--ash);}
+#soil{background:var(--white);flex-direction:row;}
+.so-txt{flex:0 0 52%;padding:72px 48px 72px 64px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--hairline);overflow:hidden;}
+.case-h{font-family:var(--serif);font-size:clamp(19px,2.2vw,30px);font-weight:400;line-height:1.18;color:var(--ink);letter-spacing:-.01em;margin-bottom:22px;text-wrap:balance;}
+.case-h em{color:var(--forest);font-style:normal;}
+.cb{font-size:12px;line-height:1.75;color:var(--ink);margin-bottom:7px;}
+.cr{font-size:11.5px;line-height:1.6;color:var(--ash);font-style:italic;margin-bottom:18px;}
+.outs{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:18px;}
+.outs li{font-size:11.5px;line-height:1.45;color:var(--ink);display:flex;gap:10px;align-items:baseline;}
+.outs li::before{content:'';display:block;width:18px;min-width:18px;height:1px;background:var(--forest);opacity:.45;margin-top:7px;flex-shrink:0;}
+.ob{font-weight:600;}
+.cl{font-size:11px;line-height:1.65;color:var(--ash);padding-top:14px;border-top:1px solid var(--hairline);}
+.cl strong{color:var(--ink);font-weight:500;}
+.so-pf{flex:0 0 48%;}
+#bioz{background:var(--pampas);padding:60px 64px 44px;}
+.bz-top{margin-bottom:22px;flex-shrink:0;}
+.bz-h{font-family:var(--serif);font-size:clamp(18px,2.1vw,28px);font-weight:400;line-height:1.2;color:var(--ink);letter-spacing:-.01em;margin-bottom:10px;text-wrap:balance;}
+.bz-intro{font-size:12px;line-height:1.7;color:var(--ink);}
+.proj-row{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;flex:1;min-height:0;}
+.pc{background:var(--white);padding:22px 18px 18px;display:flex;flex-direction:column;gap:9px;min-height:0;overflow:hidden;}
+.pc-feat{background:var(--forest);}
+.pt{font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--ash);}
+.pc-feat .pt{color:rgba(255,255,255,.38);}
+.pn{font-family:var(--serif);font-size:24px;font-weight:400;color:var(--ink);letter-spacing:-.02em;line-height:1;}
+.pc-feat .pn{color:#fff;}
+.pd{font-size:11px;line-height:1.55;color:var(--ink);flex:1;}
+.pc-feat .pd{color:rgba(255,255,255,.68);}
+.pm{font-size:10.5px;font-weight:600;color:var(--forest);}
+.pc-feat .pm{color:rgba(255,255,255,.6);}
+.pm-ph{color:#C0BDB5;font-style:italic;}
+.bz-roles{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;flex-shrink:0;}
+.rc{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;background:rgba(255,255,255,.65);border:1px solid rgba(44,66,56,.12);border-radius:14px;color:var(--ash);}
+#ocean{background:var(--forest);flex-direction:row;}
+.oc-txt{flex:0 0 45%;padding:72px 48px 72px 64px;display:flex;flex-direction:column;justify-content:center;color:#fff;border-right:1px solid rgba(255,255,255,.08);overflow:hidden;}
+.oc-h{font-family:var(--serif);font-size:clamp(19px,2.2vw,30px);font-weight:400;line-height:1.18;color:#fff;letter-spacing:-.01em;margin-bottom:22px;text-wrap:balance;}
+.ob2{font-size:12px;line-height:1.75;color:rgba(255,255,255,.62);margin-bottom:7px;}
+.oc-acts{list-style:none;display:flex;flex-direction:column;gap:6px;margin:14px 0;}
+.oc-acts li{font-size:11.5px;line-height:1.45;color:rgba(255,255,255,.62);display:flex;gap:10px;align-items:baseline;}
+.oc-acts li::before{content:'';display:block;width:18px;min-width:18px;height:1px;background:rgba(255,255,255,.28);margin-top:7px;flex-shrink:0;}
+.oc-res{font-size:11px;line-height:1.65;color:rgba(255,255,255,.45);padding-top:14px;border-top:1px solid rgba(255,255,255,.1);}
+.oc-res strong{color:rgba(255,255,255,.82);font-weight:500;}
+.oc-proof{font-family:var(--serif);font-size:13.5px;font-style:italic;line-height:1.6;color:rgba(255,255,255,.7);margin-top:14px;}
+.oc-pf{flex:0 0 55%;}
+#ecosystem{background:var(--white);padding:60px 64px 52px;}
+.ec-top{margin-bottom:26px;flex-shrink:0;}
+.ec-h{font-family:var(--serif);font-size:clamp(18px,2vw,27px);font-weight:400;line-height:1.2;color:var(--ink);letter-spacing:-.01em;margin-bottom:7px;text-wrap:balance;}
+.ec-intro{font-size:11.5px;color:var(--ash);line-height:1.5;}
+.ec-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:1px;background:var(--hairline);border:1px solid var(--hairline);flex:1;min-height:0;}
+.ei{background:var(--white);padding:18px 22px;display:flex;flex-direction:column;gap:7px;min-height:0;overflow:hidden;}
+.ei-name{font-size:12px;font-weight:600;color:var(--forest);line-height:1.3;}
+.ei-desc{font-size:11px;line-height:1.55;color:var(--ink);flex:1;}
+.ei-met{font-family:var(--mono);font-size:9px;letter-spacing:.05em;color:var(--river);margin-top:2px;}
+.ph-txt{color:#C8C5BC;font-style:italic;}
+#contact{background:var(--pampas);padding:68px 64px;justify-content:space-between;}
+.ct-top{max-width:660px;}
+.ct-stmt{font-family:var(--serif);font-size:clamp(15px,1.75vw,21px);font-weight:400;line-height:1.72;color:var(--ink);margin-bottom:14px;}
+.ct-inv{font-size:11.5px;color:var(--ash);font-style:italic;}
+.ct-bot{display:grid;grid-template-columns:1fr 2fr;gap:56px;align-items:end;}
+.ct-links{display:flex;flex-direction:column;gap:9px;}
+.ct-lnk{display:flex;align-items:center;gap:9px;font-size:11.5px;color:var(--ink);transition:color .15s;}
+.ct-lnk:hover{color:var(--forest);}
+.ct-lnk svg,.ct-loc svg{opacity:.45;flex-shrink:0;}
+.ct-loc{display:flex;align-items:center;gap:9px;font-size:11.5px;color:var(--ash);}
+.sk-blk{display:grid;grid-template-columns:repeat(3,1fr);gap:20px 28px;}
+.sk-lbl{font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--forest);margin-bottom:9px;}
+.sk-list{display:flex;flex-direction:column;gap:3px;}
+.sk{font-size:10.5px;color:var(--ash);line-height:1.5;}
+.sk-ft{grid-column:1/-1;font-size:10.5px;color:var(--ash);line-height:1.55;padding-top:12px;border-top:1px solid var(--hairline);}
+@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}body{overflow:visible!important;}.nav{display:none!important;}.sc{overflow:visible!important;scroll-snap-type:none!important;height:auto!important;}section{height:297mm!important;width:210mm!important;page-break-after:always!important;overflow:hidden!important;scroll-snap-align:none!important;}}
+@media(max-width:800px){#about,#soil,#ocean{flex-direction:column;}.ab-l,.so-txt,.oc-txt{flex:none;border-right:none;padding:48px 32px 32px;border-bottom:1px solid var(--hairline);}.ab-r{flex:none;padding:24px 32px 48px;flex-direction:row;flex-wrap:wrap;gap:20px;}.so-pf,.oc-pf{height:40vh;flex:none;}.proj-row{grid-template-columns:repeat(2,1fr);}.ec-grid{grid-template-columns:repeat(2,1fr);}#bioz,#ecosystem,#contact{padding:48px 32px;}.cv-c{padding:0 32px 48px;}.ct-bot{grid-template-columns:1fr;}.sk-blk{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-ms">MS</div>
+  <div class="nav-r">
+    <div class="lang-pill">
+      <button class="lb on" id="bEn" onclick="L('en')">EN</button>
+      <button class="lb" id="bEs" onclick="L('es')">ES</button>
+    </div>
+    <div class="dots" id="dts">
+      <div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    </div>
+  </div>
+</nav>
+
+<main class="sc" id="sc">
+
+<!-- P1 — COVER -->
+<section id="cover">
+  <div class="cv-bg pf">
+    <img src="portfolio/Portada.JPG" alt="">
+  </div>
+  <div class="cv-ov"></div>
+  <div class="cv-c">
+    <div class="cv-name">Matías<br>Scungio</div>
+    <p class="cv-tag" data-i18n
+       data-en="I design and build sustainability systems — from strategy to field implementation."
+       data-es="Diseño y ejecuto proyectos de sostenibilidad — desde la estrategia hasta el campo.">
+      I design and build sustainability systems — from strategy to field implementation.
+    </p>
+    <div class="cv-meta">
+      <span class="cv-loc">Vicente López, Buenos Aires</span>
+      <div class="cv-sep"></div>
+      <span class="cv-loc">2025</span>
+    </div>
+  </div>
+</section>
+
+<!-- P2 — ABOUT -->
+<section id="about">
+  <div class="ab-l">
+    <div class="lbl" style="margin-bottom:18px;" data-i18n data-en="ABOUT" data-es="SOBRE MÍ">ABOUT</div>
+    <p class="ab-stmt" data-i18n
+       data-en="I'm an Industrial Designer who builds sustainability projects from the ground up. For the past six years I've led the development of SOIL, a compostable packaging company, and coordinated multi-stakeholder climate initiatives across private companies, local governments, and civil society. I don't consult from outside — I build from within."
+       data-es="Soy Diseñador Industrial y construyo proyectos de sostenibilidad desde cero. Durante los últimos seis años lideré el desarrollo de SOIL, una empresa de envases compostables, y coordiné iniciativas climáticas multi-actor entre empresas privadas, gobiernos locales y sociedad civil. No consulto desde afuera — construyo desde adentro.">
+      I'm an Industrial Designer who builds sustainability projects from the ground up. For the past six years I've led the development of SOIL, a compostable packaging company, and coordinated multi-stakeholder climate initiatives across private companies, local governments, and civil society. I don't consult from outside — I build from within.
+    </p>
+    <p class="ab-ctx" data-i18n
+       data-en="SOIL was born and scaled within Bioz, a triple-impact business hub where I served as Lead Project Manager from 2020 to 2024."
+       data-es="SOIL nació y se escaló dentro de Bioz, un hub de negocios de triple impacto donde me desempeñé como Lead Project Manager de 2020 a 2024.">
+      SOIL was born and scaled within Bioz, a triple-impact business hub where I served as Lead Project Manager from 2020 to 2024.
+    </p>
+  </div>
+  <div class="ab-r">
+    <div class="met"><div class="met-n">7.3M</div><div class="met-d" data-i18n data-en="single-use plastics replaced" data-es="piezas plásticas de un solo uso reemplazadas">single-use plastics replaced</div></div>
+    <div class="met"><div class="met-n">100+</div><div class="met-d" data-i18n data-en="active B2B clients" data-es="clientes B2B activos">active B2B clients</div></div>
+    <div class="met"><div class="met-n">200+</div><div class="met-d" data-i18n data-en="companies in sustainability coalition" data-es="empresas en coalición de sostenibilidad">companies in sustainability coalition</div></div>
+    <div class="met"><div class="met-n">60d</div><div class="met-d" data-i18n data-en="idea to field deployment — zero budget" data-es="de idea a instalación en campo — sin presupuesto">idea to field deployment — zero budget</div></div>
+  </div>
+</section>
+
+<!-- P3 — SOIL -->
+<section id="soil">
+  <div class="so-txt">
+    <div class="lbl" style="margin-bottom:10px;" data-i18n data-en="CASE STUDY 01" data-es="CASO 01">CASE STUDY 01</div>
+    <img src="portfolio/LOGO SOIL ORIGINAL.png" alt="SOIL" style="height:22px;display:block;margin-bottom:20px;opacity:0.88;max-width:120px;object-fit:contain;object-position:left;">
+    <h2 class="case-h">
+      <em data-i18n data-en="7,318,353" data-es="7.318.353">7,318,353</em>
+      <span data-i18n data-en=" single-use plastics replaced in five years." data-es=" piezas plásticas de un solo uso reemplazadas en cinco años."> single-use plastics replaced in five years.</span>
+    </h2>
+    <p class="cb" data-i18n
+       data-en="In Argentina, single-use plastics dominated foodservice. Sustainable alternatives existed abroad but hadn't been developed locally at commercial scale. We set out to change that."
+       data-es="En Argentina, el plástico de un solo uso dominaba el rubro gastronómico. Las alternativas sostenibles existían afuera pero no se habían desarrollado localmente a escala comercial. Decidimos cambiar eso.">
+      In Argentina, single-use plastics dominated foodservice. Sustainable alternatives existed abroad but hadn't been developed locally at commercial scale. We set out to change that.
+    </p>
+    <p class="cr" data-i18n
+       data-en="I led end-to-end operations: product development, supplier coordination, commercial strategy, and team management."
+       data-es="Lideré las operaciones end-to-end: desarrollo de producto, coordinación de proveedores, estrategia comercial y gestión de equipo.">
+      I led end-to-end operations: product development, supplier coordination, commercial strategy, and team management.
+    </p>
+    <ul class="outs">
+      <li><span class="ob" data-i18n data-en="7,318,353" data-es="7.318.353">7,318,353</span><span data-i18n data-en=" single-use plastics replaced (~7 tonnes)" data-es=" piezas plásticas reemplazadas (~7 toneladas)"> single-use plastics replaced (~7 tonnes)</span></li>
+      <li><span class="ob">100+</span><span data-i18n data-en=" active B2B clients" data-es=" clientes B2B activos"> active B2B clients</span></li>
+      <li><span class="ob">30+</span><span data-i18n data-en=" commercialized products" data-es=" productos comercializados"> commercialized products</span></li>
+      <li><span class="ob" data-i18n data-en="5 years" data-es="5 años">5 years</span><span data-i18n data-en=" of sustained growth" data-es=" de crecimiento sostenido"> of sustained growth</span></li>
+    </ul>
+    <p class="cl">
+      <strong data-i18n data-en="What I learned: " data-es="Lo que aprendí: ">What I learned: </strong>
+      <span data-i18n
+        data-en="Sustainability sells when the price is right and the product works. The environmental argument always comes second."
+        data-es="La sostenibilidad se vende cuando el precio funciona y el producto también. El argumento ambiental siempre viene después.">Sustainability sells when the price is right and the product works. The environmental argument always comes second.</span>
+    </p>
+  </div>
+  <div class="so-pf pf">
+    <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      <source src="portfolio/Video SOIL.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
+
+<!-- P4 — BIOZ -->
+<section id="bioz">
+  <div class="bz-top">
+    <div class="lbl" style="margin-bottom:10px;" data-i18n data-en="CASE STUDY 02" data-es="CASO 02">CASE STUDY 02</div>
+    <img src="portfolio/Logo Bioz .png" alt="Bioz" style="height:22px;display:block;margin-bottom:14px;opacity:0.88;max-width:120px;object-fit:contain;object-position:left;">
+    <h2 class="bz-h" data-i18n
+        data-en="Building the infrastructure for triple-impact businesses."
+        data-es="Construyendo la infraestructura para negocios de triple impacto.">
+      Building the infrastructure for triple-impact businesses.
+    </h2>
+    <p class="bz-intro" data-i18n
+       data-en="Bioz is a triple-impact business hub where I served as Lead Project Manager from 2020 to 2024. I led the design, management, and execution of four sustainability ventures — from initial concept to market."
+       data-es="Bioz es un hub de negocios de triple impacto donde me desempeñé como Lead Project Manager de 2020 a 2024. Lideré el diseño, la gestión y la ejecución de cuatro emprendimientos sostenibles — desde la idea hasta el mercado.">
+      Bioz is a triple-impact business hub where I served as Lead Project Manager from 2020 to 2024. I led the design, management, and execution of four sustainability ventures — from initial concept to market.
+    </p>
+  </div>
+  <div class="proj-row">
+
+    <!-- SOIL featured -->
+    <div class="pc pc-feat pc-has-img">
+      <div class="pc-thumb">
+        <img src="portfolio/Caso SOIL - pagina BIOZ .jpg" alt="">
+        <div class="pc-thumb-ov"></div>
+      </div>
+      <div class="pc-body">
+        <div class="pt" data-i18n data-en="COMPOSTABLE" data-es="COMPOSTABLE">COMPOSTABLE</div>
+        <img class="pc-logo" src="portfolio/LOGO SOIL ORIGINAL.png" alt="SOIL">
+        <div class="pn">SOIL</div>
+        <p class="pd" data-i18n
+           data-en="Compostable packaging replacing single-use plastics in Argentine foodservice."
+           data-es="Envases compostables que reemplazan plásticos de un solo uso en la gastronomía argentina.">
+          Compostable packaging replacing single-use plastics in Argentine foodservice.
+        </p>
+        <div class="pm">7.3M units · 100+ clients</div>
+      </div>
+    </div>
+
+    <!-- EMF -->
+    <div class="pc pc-has-img">
+      <div class="pc-thumb"><img src="portfolio/emf case.jpg" alt=""></div>
+      <div class="pc-body">
+        <div class="pt" data-i18n data-en="REUSABLE" data-es="REUTILIZABLE">REUSABLE</div>
+        <img class="pc-logo" src="portfolio/emf_Logo.png" alt="EMF">
+        <div class="pn">EMF</div>
+        <p class="pd" data-i18n
+           data-en="Reusable mask designed to replace single-use surgical masks — reducing medical waste at scale."
+           data-es="Mascarilla reutilizable para reemplazar barbijos de un solo uso — reduciendo residuos médicos a escala.">
+          Reusable mask designed to replace single-use surgical masks — reducing medical waste at scale.
+        </p>
+        <div class="pm pm-ph" data-i18n data-en="[add result]" data-es="[agregar resultado]">[add result]</div>
+      </div>
+    </div>
+
+    <!-- Ecofold -->
+    <div class="pc pc-has-img">
+      <div class="pc-thumb"><img src="portfolio/ecofold case.jpg" alt=""></div>
+      <div class="pc-body">
+        <div class="pt" data-i18n data-en="RECYCLABLE" data-es="RECICLABLE">RECYCLABLE</div>
+        <img class="pc-logo" src="portfolio/logos-ecofoldhome.png" alt="Ecofold">
+        <div class="pn">Ecofold</div>
+        <p class="pd" data-i18n
+           data-en="Sustainable display systems built with steel — the world's most recycled material."
+           data-es="Sistemas de exhibición fabricados con acero — el material más reciclado del mundo.">
+          Sustainable display systems built with steel — the world's most recycled material.
+        </p>
+        <div class="pm pm-ph" data-i18n data-en="[add result]" data-es="[agregar resultado]">[add result]</div>
+      </div>
+    </div>
+
+    <!-- Waler -->
+    <div class="pc pc-has-img">
+      <div class="pc-thumb"><img src="portfolio/Waler CAse.jpg" alt=""></div>
+      <div class="pc-body">
+        <div class="pt" data-i18n data-en="CIRCULAR" data-es="CIRCULAR">CIRCULAR</div>
+        <img class="pc-logo" src="portfolio/Waler.png" alt="Waler">
+        <div class="pn">Waler</div>
+        <p class="pd" data-i18n
+           data-en="Containment barriers manufactured with recovered recycled materials."
+           data-es="Vallas de contención fabricadas con materiales reciclados recuperados.">
+          Containment barriers manufactured with recovered recycled materials.
+        </p>
+        <div class="pm pm-ph" data-i18n data-en="[add result]" data-es="[agregar resultado]">[add result]</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="bz-roles">
+    <span class="rc" data-i18n data-en="Strategic Planning" data-es="Planificación estratégica">Strategic Planning</span>
+    <span class="rc" data-i18n data-en="Business Plans" data-es="Business Plans">Business Plans</span>
+    <span class="rc" data-i18n data-en="Team Coordination" data-es="Coordinación de equipos">Team Coordination</span>
+    <span class="rc" data-i18n data-en="Stakeholder Engagement" data-es="Articulación con el ecosistema">Stakeholder Engagement</span>
+    <span class="rc" data-i18n data-en="Feasibility Analysis" data-es="Análisis de viabilidad">Feasibility Analysis</span>
+  </div>
+</section>
+
+<!-- P5 — OCEAN UPRISE -->
+<section id="ocean">
+  <div class="oc-txt">
+    <div class="lbl lbl-lt" style="margin-bottom:10px;" data-i18n data-en="CASE STUDY 03" data-es="CASO 03">CASE STUDY 03</div>
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+      <img src="portfolio/Ocean uprise logo.png" alt="Ocean Uprise" style="height:22px;opacity:0.92;max-width:130px;object-fit:contain;object-position:left;border-radius:2px;">
+      <span style="color:rgba(255,255,255,.2);font-size:12px;">&#215;</span>
+      <img src="portfolio/Parley logo.png" alt="Parley" style="height:18px;opacity:0.88;max-width:80px;object-fit:contain;object-position:left;border-radius:2px;">
+    </div>
+    <h2 class="oc-h" data-i18n
+        data-en="From idea to a working river barrier in 60 days. Zero funding."
+        data-es="De la idea a una barrera funcional en el río en 60 días. Sin financiamiento.">
+      From idea to a working river barrier in 60 days. Zero funding.
+    </h2>
+    <p class="ob2" data-i18n
+       data-en="Plastic waste from Buenos Aires neighborhoods was reaching the Río de la Plata through urban waterways. The solution required something that didn't exist yet — and someone willing to build it."
+       data-es="Los residuos plásticos llegaban al Río de la Plata a través de cursos de agua urbanos. La solución requería algo que no existía — y alguien dispuesto a construirlo.">
+      Plastic waste from Buenos Aires neighborhoods was reaching the Río de la Plata through urban waterways. The solution required something that didn't exist yet — and someone willing to build it.
+    </p>
+    <ul class="oc-acts">
+      <li data-i18n data-en="Designed the barrier concept from scratch" data-es="Diseñé el concepto de barrera desde cero">Designed the barrier concept from scratch</li>
+      <li data-i18n data-en="Coordinated companies for material donations" data-es="Coordiné empresas para donación de materiales">Coordinated companies for material donations</li>
+      <li data-i18n data-en="Secured municipal permits and technical supervision" data-es="Gestioné permisos municipales y supervisión técnica">Secured municipal permits and technical supervision</li>
+      <li data-i18n data-en="Led volunteer installation on-site" data-es="Lideré la instalación en campo con voluntarios">Led volunteer installation on-site</li>
+    </ul>
+    <p class="oc-res">
+      <strong data-i18n data-en="The barrier was installed and operated for several months." data-es="La barrera fue instalada y operó durante varios meses.">The barrier was installed and operated for several months.</strong>
+      <span data-i18n
+        data-en=" Two severe floods tested it — I repaired the first; the second exceeded the prototype's scope. Field-validated."
+        data-es=" Dos crecidas severas la pusieron a prueba — la primera la reparé; la segunda excedió el alcance del prototipo. Validado en campo."> Two severe floods tested it — I repaired the first; the second exceeded the prototype's scope. Field-validated.</span>
+    </p>
+    <p class="oc-proof" data-i18n
+       data-en="&ldquo;Multi-sector coordination is the bottleneck in environmental solutions — not technology, not funding.&rdquo;"
+       data-es="&ldquo;La coordinación multi-actor es el cuello de botella en las soluciones ambientales — no la tecnología, no el financiamiento.&rdquo;">
+      &ldquo;Multi-sector coordination is the bottleneck in environmental solutions — not technology, not funding.&rdquo;
+    </p>
+  </div>
+  <div class="oc-pf pf pf-dk">
+    <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      <source src="portfolio/video-ocean.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
+
+<!-- P6 — ECOSYSTEM -->
+<section id="ecosystem">
+  <div class="ec-top">
+    <div class="lbl" style="margin-bottom:10px;" data-i18n data-en="IMPACT ECOSYSTEM" data-es="ECOSISTEMA DE IMPACTO">IMPACT ECOSYSTEM</div>
+    <h2 class="ec-h" data-i18n
+        data-en="Sustainability doesn't happen inside a single organization."
+        data-es="La sostenibilidad no sucede dentro de una sola organización.">
+      Sustainability doesn't happen inside a single organization.
+    </h2>
+    <p class="ec-intro" data-i18n
+       data-en="Across four years, I've contributed to multiple cross-sector sustainability initiatives in Argentina."
+       data-es="A lo largo de cuatro años, participé en múltiples iniciativas de sostenibilidad multi-actor en Argentina.">
+      Across four years, I've contributed to multiple cross-sector sustainability initiatives in Argentina.
+    </p>
+  </div>
+  <div class="ec-grid">
+
+    <!-- Vicente López -->
+    <div class="ei ei-has-img">
+      <div class="ei-thumb"><img src="portfolio/Mesa sustentabilidad de Vicente lopez 1.jpeg" alt=""></div>
+      <div class="ei-body">
+        <div class="ei-name" data-i18n data-en="Sustainability Board — Vicente López" data-es="Mesa de Sustentabilidad — Vicente López">Sustainability Board — Vicente López</div>
+        <p class="ei-desc" data-i18n
+           data-en="Four-year collaboration between 200+ companies and local government co-designing climate action initiatives."
+           data-es="Cuatro años de colaboración entre 200+ empresas y el municipio co-diseñando iniciativas de acción climática.">
+          Four-year collaboration between 200+ companies and local government co-designing climate action initiatives.
+        </p>
+        <div class="ei-met" data-i18n data-en="200+ companies · 30+ t recycled · 20+ native plantings/yr" data-es="200+ empresas · 30+ t recicladas · 20+ plantaciones/año">200+ companies · 30+ t recycled · 20+ native plantings/yr</div>
+      </div>
+    </div>
+
+    <!-- CABA -->
+    <div class="ei ei-has-img">
+      <div class="ei-thumb"><img src="portfolio/mesa de susntebilidad Caba.png" alt=""></div>
+      <div class="ei-body">
+        <div class="ei-name" data-i18n data-en="Circular Economy — CABA" data-es="Mesas de Economía Circular — CABA">Circular Economy — CABA</div>
+        <p class="ei-desc" data-i18n
+           data-en="Participated in circular economy working groups convened by the City of Buenos Aires."
+           data-es="Participé en las mesas de economía circular convocadas por la Ciudad de Buenos Aires.">
+          Participated in circular economy working groups convened by the City of Buenos Aires.
+        </p>
+        <div class="ei-met ph-txt" data-i18n data-en="[completar con resultado]" data-es="[completar con resultado]">[completar con resultado]</div>
+      </div>
+    </div>
+
+    <!-- Bioproductos -->
+    <div class="ei ei-has-img">
+      <div class="ei-thumb"><img src="portfolio/Bioproductos.jpeg" alt=""></div>
+      <div class="ei-body">
+        <div class="ei-name" data-i18n data-en="Bioproductos — Ministry of Agriculture" data-es="Bioproductos — Ministerio de Agricultura">Bioproductos — Ministry of Agriculture</div>
+        <p class="ei-desc" data-i18n
+           data-en="Engaged with the national bioproducts program led by Argentina's Ministry of Agriculture."
+           data-es="Participé en el programa nacional de bioproductos del Ministerio de Agricultura.">
+          Engaged with the national bioproducts program led by Argentina's Ministry of Agriculture.
+        </p>
+        <div class="ei-met ph-txt" data-i18n data-en="[completar]" data-es="[completar]">[completar]</div>
+      </div>
+    </div>
+
+    <!-- Sistema B -->
+    <div class="ei ei-has-img">
+      <div class="ei-thumb"><img src="portfolio/Sistema B.jpeg" alt=""></div>
+      <div class="ei-body">
+        <div class="ei-name" data-i18n data-en="Sistema B / B Corp Ecosystem" data-es="Sistema B / Empresas B">Sistema B / B Corp Ecosystem</div>
+        <p class="ei-desc" data-i18n
+           data-en="Active participation in Argentina's B Corp community and events."
+           data-es="Participación activa en la comunidad y eventos de Empresas B en Argentina.">
+          Active participation in Argentina's B Corp community and events.
+        </p>
+        <div class="ei-met ph-txt" data-i18n data-en="[completar]" data-es="[completar]">[completar]</div>
+      </div>
+    </div>
+
+    <!-- Bioferia -->
+    <div class="ei ei-has-img">
+      <div class="ei-thumb"><img src="portfolio/Bioferia.JPG" alt=""></div>
+      <div class="ei-body">
+        <div class="ei-name" data-i18n data-en="Bioferia" data-es="Bioferia">Bioferia</div>
+        <p class="ei-desc ph-txt" data-i18n data-en="[Matías: add 2-sentence description]" data-es="[Matías: agregar 2 oraciones]">[Matías: add 2-sentence description]</p>
+        <div class="ei-met ph-txt" data-i18n data-en="[completar]" data-es="[completar]">[completar]</div>
+      </div>
+    </div>
+
+    <!-- Impact House -->
+    <div class="ei ei-has-img">
+      <div class="ei-thumb"><img src="portfolio/sistema impact house.jpg" alt=""></div>
+      <div class="ei-body">
+        <div class="ei-name" data-i18n data-en="Sistema Impact House" data-es="Sistema Impact House">Sistema Impact House</div>
+        <p class="ei-desc ph-txt" data-i18n data-en="[Matías: add 2-sentence description]" data-es="[Matías: agregar 2 oraciones]">[Matías: add 2-sentence description]</p>
+        <div class="ei-met ph-txt" data-i18n data-en="[completar]" data-es="[completar]">[completar]</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- P7 — CONTACT -->
+<section id="contact">
+  <div class="ct-top">
+    <div class="lbl" style="margin-bottom:18px;" data-i18n data-en="LET'S TALK" data-es="HABLEMOS">LET'S TALK</div>
+    <p class="ct-stmt" data-i18n
+       data-en="I grew up along the Río de la Plata. Watching that river made me understand that environmental problems are always stakeholder problems — they require someone willing to sit at multiple tables at once. That's the work I've built my career around: connecting what needs to be connected, building what needs to be built, and staying in the field long enough to see it actually work."
+       data-es="Crecí a orillas del Río de la Plata. Ver ese río me enseñó que los problemas ambientales son siempre problemas de actores — requieren a alguien dispuesto a sentarse en varias mesas a la vez. Eso es lo que construí a lo largo de mi carrera: conectar lo que necesita conectarse, construir lo que necesita construirse, y quedarme en el campo el tiempo suficiente para ver que realmente funciona.">
+      I grew up along the Río de la Plata. Watching that river made me understand that environmental problems are always stakeholder problems — they require someone willing to sit at multiple tables at once. That's the work I've built my career around: connecting what needs to be connected, building what needs to be built, and staying in the field long enough to see it actually work.
+    </p>
+    <p class="ct-inv" data-i18n
+       data-en="Open to opportunities in sustainability, project management, and climate action — globally."
+       data-es="Abierto a oportunidades en sostenibilidad, gestión de proyectos y acción climática — globalmente.">
+      Open to opportunities in sustainability, project management, and climate action — globally.
+    </p>
+  </div>
+  <div class="ct-bot">
+    <div class="ct-links">
+      <a href="mailto:ma.scungio@gmail.com" class="ct-lnk">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="1" y="2.5" width="11" height="8" rx="1" stroke="currentColor" stroke-width="1.1"/><path d="M1 4l5.5 3.5L12 4" stroke="currentColor" stroke-width="1.1"/></svg>
+        ma.scungio@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/matias-scungio" target="_blank" class="ct-lnk">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="1" y="1" width="11" height="11" rx="1.5" stroke="currentColor" stroke-width="1.1"/><path d="M4 5v4M4 3.5v.5M6 9V7c0-.7.6-1.2 1.2-1.2s1.3.5 1.3 1.2V9" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+        linkedin.com/in/matias-scungio
+      </a>
+      <span class="ct-loc">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.5C4.6 1.5 3 3 3 4.8c0 2.6 3.5 6.7 3.5 6.7S10 7.4 10 4.8C10 3 8.4 1.5 6.5 1.5zm0 4.2A1.4 1.4 0 116.5 3a1.4 1.4 0 010 2.7z" stroke="currentColor" stroke-width="1.1"/></svg>
+        Vicente López, Buenos Aires
+      </span>
+    </div>
+    <div class="sk-blk">
+      <div>
+        <div class="sk-lbl" data-i18n data-en="Sustainability" data-es="Sostenibilidad">Sustainability</div>
+        <div class="sk-list">
+          <span class="sk">Circular Economy</span><span class="sk">Biomaterials</span><span class="sk">Climate Action</span><span class="sk">ESG Frameworks</span><span class="sk">Stakeholder Mgmt.</span>
+        </div>
+      </div>
+      <div>
+        <div class="sk-lbl" data-i18n data-en="Project Management" data-es="Gestión de Proyectos">Project Management</div>
+        <div class="sk-list">
+          <span class="sk">Strategic Planning</span><span class="sk">Business Development</span><span class="sk">Feasibility Analysis</span><span class="sk">Team Leadership</span><span class="sk">Business Plans</span>
+        </div>
+      </div>
+      <div>
+        <div class="sk-lbl" data-i18n data-en="Tools &amp; Tech" data-es="Herramientas">Tools &amp; Tech</div>
+        <div class="sk-list">
+          <span class="sk">AI (Claude, ChatGPT)</span><span class="sk">n8n Automation</span><span class="sk">Web Development</span><span class="sk">G Suite · Excel</span><span class="sk">Adobe Suite</span>
+        </div>
+      </div>
+      <div class="sk-ft" data-i18n
+           data-en="English — Advanced (First Certificate B2, 2013) · Italian — Beginner · Industrial Design, FADU UBA 2019 · Project Management, Carina Petri 2021"
+           data-es="Inglés — Avanzado (First Certificate B2, 2013) · Italiano — Principiante · Diseño Industrial, FADU UBA 2019 · Gestión de Proyectos, Carina Petri 2021">
+        English — Advanced (First Certificate B2, 2013) · Italian — Beginner · Industrial Design, FADU UBA 2019 · Project Management, Carina Petri 2021
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+var els=document.querySelectorAll('[data-i18n]');
+function L(lang){els.forEach(function(el){var v=el.getAttribute('data-'+lang);if(v!==null)el.innerHTML=v;});document.getElementById('bEn').classList.toggle('on',lang==='en');document.getElementById('bEs').classList.toggle('on',lang==='es');document.documentElement.lang=lang;try{localStorage.setItem('pl',lang);}catch(e){}}
+try{L(localStorage.getItem('pl')||'en');}catch(e){L('en');}
+var sc=document.getElementById('sc');
+var secs=Array.from(document.querySelectorAll('section'));
+var dots=Array.from(document.querySelectorAll('.dot'));
+var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting&&e.intersectionRatio>=0.5){var i=secs.indexOf(e.target);if(i>=0)dots.forEach(function(d,j){d.classList.toggle('on',j===i);});}});},{root:sc,threshold:0.5});
+secs.forEach(function(s){io.observe(s);});
+</script>
+</body>
+</html>
