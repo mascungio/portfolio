@@ -42,7 +42,9 @@ section{height:100vh;width:100%;scroll-snap-align:start;position:relative;displa
 .ei-has-img{padding:0;}
 #cover{background:var(--forest-deep);}
 .cv-bg{position:absolute;inset:0;}
-.cv-ov{position:absolute;inset:0;background:linear-gradient(160deg,transparent 25%,rgba(15,25,20,.5) 65%,rgba(10,18,14,.88) 100%);z-index:1;}
+.cv-ov{position:absolute;inset:0;background:linear-gradient(160deg,transparent 25%,rgba(15,25,20,.4) 65%,rgba(10,18,14,.7) 100%);z-index:1;}
+.cv-socalo{position:absolute;bottom:0;left:0;right:0;height:62%;background:linear-gradient(to top,rgba(4,10,6,0.86) 0%,rgba(4,10,6,0.55) 40%,transparent 100%);z-index:1;}
+@media(min-width:801px){.cv-bg img{object-position:50% 20%;}}
 .cv-c{position:relative;z-index:2;padding:0 64px 64px;margin-top:auto;}
 .cv-name{font-family:var(--sans);font-size:clamp(48px,6.5vw,88px);font-weight:700;line-height:.92;letter-spacing:-.035em;color:#fff;margin-bottom:22px;}
 .cv-tag{font-size:clamp(13px,1.35vw,16px);font-weight:400;line-height:1.6;color:rgba(255,255,255,.7);max-width:500px;margin-bottom:28px;}
@@ -186,6 +188,7 @@ section{height:100vh;width:100%;scroll-snap-align:start;position:relative;displa
     <img src="portfolio/Portada.JPG" alt="">
   </div>
   <div class="cv-ov"></div>
+  <div class="cv-socalo"></div>
   <div class="cv-c">
     <div class="cv-name">Matías<br>Scungio</div>
     <p class="cv-tag" data-i18n
